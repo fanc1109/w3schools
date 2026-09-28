@@ -1,0 +1,70 @@
+//fetch() de texto
+// Fetch a file
+fetch(file)
+  .then(function(response) {
+     return response.text();
+  })
+  .then(function(data) {
+    myDisplayer(data);
+  });
+  //com setas
+  // Fetch a file
+fetch(file)
+  .then(response => response.text())
+  .then(data => myDisplayer(data)); 
+  //funcao assincrona
+  // Async function to fetch a file
+async function loadText(file) {
+  const response = await fetch(file);
+  myDisplayer(await response.text());
+}
+//object Response
+// Async function to download a file
+async function loadText(file) {
+  const response = await fetch(file);
+  myDisplayer(response);
+}
+//response.ok` deve ser verdadeira 
+// Async function to download a file
+async function loadText(file) {
+  const response = await fetch(file);
+  myDisplayer(response.ok);
+}
+// status 200
+// Async function to download a file
+async function loadText(file) {
+  const response = await fetch(file);
+  myDisplayer(response.status);
+}
+//url
+// Async function to download a file
+async function loadText(file) {
+  const response = await fetch(file);
+  myDisplayer(response.url);
+}
+//saida assincrona
+// Async function to download a file
+async function loadText(file) {
+  const response = await fetch(file);
+  myDisplayer(response.url);
+}
+
+loadText("fetch.txt");
+myDisplayer("JavaScript continues.");
+
+//tipos de modelos de resposta 
+/*texto()	Lê a resposta como texto.
+json()	Lê a resposta como JSON
+blob()	Lê a resposta como dados binários.
+bytes()	Lê a resposta como bytes
+arrayBuffer()	Lê a resposta como um ArrayBuffer.*/
+
+//verificacao de erros http
+async function loadText(file) {
+  const response = await fetch(file);
+  if (!response.ok) {
+    myDisplayer(response.status + " " + response.statusText);
+    return;
+  }
+  myDisplayer(await response.text());
+}

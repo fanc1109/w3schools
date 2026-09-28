@@ -1,0 +1,72 @@
+#criar tabelas novas 
+CREATE TABLE Persons (
+  PersonID int PRIMARY KEY,
+  LastName varchar(255) NOT NULL,
+  FirstName varchar(255),
+  Address varchar(255),
+  City varchar(255)
+);
+
+#criar uma tabela com base em outra 
+syntax:
+CREATE TABLE new_table AS
+SELECT column1, column2,...
+FROM existing_table
+WHERE ....;
+ex:
+CREATE TABLE GermanCustomers AS
+SELECT * FROM Customers
+WHERE Country = 'Germany';
+
+#chave estrangeira no create tabela
+CREATE TABLE Orders (
+    OrderID int PRIMARY KEY,
+    OrderNumber int NOT NULL,
+    PersonID int,
+    CONSTRAINT fk_Person
+    FOREIGN KEY (PersonID)
+    REFERENCES Persons(PersonID)
+);
+#chave estrangeira no alter table
+ALTER TABLE Orders
+ADD CONSTRAINT fk_Person
+FOREIGN KEY (PersonID)
+REFERENCES Persons(PersonID);
+#remover uma restricao de chave estrangeira 
+ALTER TABLE Orders
+DROP FOREIGN KEY fk_Person;
+
+#INNER JOIN Syntax:
+SELECT table1.column1, table1.column2, ..., table2.column1, ...
+FROM table1
+INNER JOIN table2
+ON table1.condition_column = table2.condition_column;
+ex:
+SELECT Products.ProductID, Products.ProductName, Categories.CategoryName
+FROM Products
+INNER JOIN Categories ON Products.CategoryID = Categories.CategoryID;
+
+#INNER JOIN de mais de 2 tabelas 
+SELECT Orders.OrderID, Customers.CustomerName, Shippers.ShipperName
+FROM Orders
+INNER JOIN Customers ON Orders.CustomerID = Customers.CustomerID
+INNER JOIN Shippers ON Orders.ShipperID = Shippers.ShipperID;
+
+#funcao count() syntax:
+SELECT COUNT([DISTINCT] column_name | *)
+FROM table_name
+WHERE condition;
+//COUNT(*)- Conta o número total de linhas em uma tabela (incluindo valores NULL).
+ex:SELECT COUNT(*)
+FROM Products;
+//COUNT(columnname)- Conta todos os valores não nulos na coluna.
+ex:SELECT COUNT(ProductID)
+FROM Products;
+//COUNT(DISTINCT columnname)- Conta apenas os valores únicos e não nulos na coluna.
+ex:SELECT COUNT(DISTINCT Price)
+FROM Products;
+#clausula WHERE
+SELECT COUNT(ProductID)
+FROM Products
+WHERE Price > 20;
+
